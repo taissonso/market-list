@@ -1,6 +1,10 @@
 # market-list
 Se trata de uma lista de compras para supermercado/feira. 
 
-        - A lista de compras será salva no localStorage, ao carregar a página verifica
-    se já existe uma lista no localStora. Se positivo carrega a lista, caso contrário
-    irá criar a lista e ficar aguardando a adição de um produto.  
+    -- A lista de compras será salva no localStorage, ao carregar a página verifica se já existe 
+    uma lista no localStorage. 
+        - Se positivo, carrega a lista e mostra os itens na tabela. Se a lista estiver vazia mostra uma mensagem na tabela. 
+        - Se negativo, cria o vetor no localStorage e mostra a mensagem de lista vazia na tabela.
+
+    -- Campos de entrada: os input's 'Produto' e 'Quantidade' podem enviar produtos repetidos, a única restrição será o envio de itens vazios no campo 'Produto'.
+        - Caso positivo para itens vazios irá mostrar uma mensagem alertando o eventual erro.

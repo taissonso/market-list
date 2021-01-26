@@ -26,10 +26,16 @@ window.addEventListener("load", ()=> {
     }
 
     function mostrarMensagem() {
-        let body = document.querySelector('body');
+        let tabela = document.querySelector('.product-add-table');
         let texto = '* Sua Lista está vazia!!!'
-        let teste = document.createElement('h1');
-        teste.innerHTML = texto;
-        body.appendChild(teste);
+        let footerTable = document.createElement('tfoot');
+        footerTable.innerHTML = texto;
+        tabela.appendChild(footerTable);
     }
+
+    var btnEnviar = document.getElementById('btn-enviar');
+    btnEnviar.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        console.log('ENVIOU!!!');
+    });
 });
