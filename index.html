@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market List</title>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js" type="module"></script>
 
 </head>
 
@@ -18,10 +18,12 @@
     <form action="">
             <label for="product">Produto</label>
             <input type="text" id="product">
-
+            
             <label for="quantity">Quantidade</label>
             <input type="text" id="quantity">
             <button id="btn-enviar">Adicionar</button>
+
+            <span id="error"style="visibility:hidden">* Campo Produto está vazio!</span>
     </form>
 
     <main>

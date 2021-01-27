@@ -1,3 +1,6 @@
+import {criarElemento, integrarElemento} from './elementos.js';
+
+
 /**
  *  - Ao carregar o arquivo, verifica se existe a lista no localStorage.
  *      - Se positivo, verifica se a lista ta vazia e mostra uma mensagem.
@@ -35,7 +38,16 @@ window.addEventListener("load", ()=> {
 
     var btnEnviar = document.getElementById('btn-enviar');
     btnEnviar.addEventListener('click', (ev) => {
+
+        let entrada = document.getElementById("product").value;
+        let span = document.getElementById('error');
+        if(entrada.trim() == '') {
+           span.style.visibility = 'visible';
+        } else {
+            span.style.visibility = 'hidden';
+        }
+        document.querySelector('form').reset();
         ev.preventDefault();
-        console.log('ENVIOU!!!');
     });
+
 });
