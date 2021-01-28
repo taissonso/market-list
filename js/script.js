@@ -39,15 +39,32 @@ window.addEventListener("load", ()=> {
     var btnEnviar = document.getElementById('btn-enviar');
     btnEnviar.addEventListener('click', (ev) => {
 
-        let entrada = document.getElementById("product").value;
+        let produto = document.getElementById("product").value;
+        let quantidade = document.getElementById("quantity").value;
         let span = document.getElementById('error');
-        if(entrada.trim() == '') {
+        if(produto.trim() == '') {
            span.style.visibility = 'visible';
         } else {
             span.style.visibility = 'hidden';
+            adicionarItem(produto,quantidade);
         }
         document.querySelector('form').reset();
         ev.preventDefault();
     });
+
+    /** 
+     *  Cria um vetor para receber uma copia dos valores do localStorage caso existam.
+     *  Adiciona os valores dos inputs no objeto. 
+     *  Copia os valores do localStorage para o array.
+     *  Adiciona o item no final do array
+     *  E atualiza o localStorage
+     */
+    function adicionarItem(produto, quantidade) {
+        let arrayTemporario = new Array();
+        const item = {produto, quantidade};
+        arrayTemporario = JSON.parse(localStorage.getItem("listaProdutos"));
+        arrayTemporario.push(item);
+        localStorage.setItem("listaProdutos", JSON.stringify(arrayTemporario));
+    }
 
 });

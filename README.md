@@ -7,6 +7,8 @@ Se trata de uma lista de compras para supermercado/feira.
         uma mensagem na tabela. 
         - Se negativo, cria o vetor no localStorage e mostra a mensagem de lista vazia na tabela.
 
-    -- Campos de entrada: os input's 'Produto' e 'Quantidade' podem enviar produtos repetidos, a única restrição será o envio de itens vazios no campo 'Produto'.
+    -- Campos de entrada: os input's 'Produto' e 'Quantidade' podem enviar
+    produtos repetidos, a única restrição será o envio de itens vazios no
+    campo 'Produto'.
         - Caso positivo para itens vazios irá mostrar uma mensagem alertando o eventual erro.
         - Caso de envio com sucesso, irá limpar os campos de entrada.
