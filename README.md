@@ -12,3 +12,8 @@ Se trata de uma lista de compras para supermercado/feira.
     campo 'Produto'.
         - Caso positivo para itens vazios irá mostrar uma mensagem alertando o eventual erro.
         - Caso de envio com sucesso, irá limpar os campos de entrada.
+
+    -- Tabela de produtos: lista todos os produtos adicionados, cria o checkbox no primeiro
+    campo, para indicar que o item já foi comprado ou concluído. 
+        - No campo quantidade, quando não for adicionado uma quantidade, será inserido um sinal de
+        menos (-).  
