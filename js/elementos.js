@@ -30,7 +30,7 @@ function adicionarNaTabela(item) {
     integrarElemento(corpoTabela, linha);
 }
 
-export default function criarElemento(elemento) {
+function criarElemento(elemento) {
     return document.createElement(elemento);
 }
 
