@@ -17,7 +17,9 @@ window.addEventListener("load", () => {
      */
     function criarLista() {
         let listaProdutos = new Array();
+        let listaRemovidos = new Array();
         localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+        localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
         mostrarMensagem(listaProdutos.length);
     }
 
@@ -26,18 +28,26 @@ window.addEventListener("load", () => {
      * Chama a função para adicionar na tabela usando o for..of
      */
     function carregarLista() {
-        let lista = JSON.parse(localStorage.getItem("listaProdutos"));
-        mostrarMensagem(lista.length);
+        let listProduct = JSON.parse(localStorage.getItem("listaProdutos"));
+        let listDeleted = JSON.parse(localStorage.getItem("listaRemovidos"));
+        mostrarMensagem(listProduct.length);
 
-        for (let chave of lista) {
-            adicionarNaTabela(chave);
+        let tabelaAdd = document.querySelector('.product-add tbody');
+        let tabelaDeleted = document.querySelector('.product-deleted tbody');
+
+        for (let chave of listProduct) {
+            adicionarNaTabela(tabelaAdd, chave);
+        }
+
+        for (let chave of listDeleted) {
+            adicionarNaTabela(tabelaDeleted, chave);
         }
     }
 
     /** Muda o CSS do span para mostrar a mensagem ou não na lista*/
     function mostrarMensagem(tamanhoLista) {
         let span = document.getElementById('lista-vazia');
-        if(tamanhoLista > 0){
+        if (tamanhoLista > 0) {
             span.style.display = 'none';
         } else {
             span.style.display = 'flex';
@@ -77,16 +87,95 @@ window.addEventListener("load", () => {
      *  Adiciona o item na tabela. 
      */
     function adicionarItem(produto, quantidade) {
-        let arrayTemporario = new Array();
+        let tableAdd = document.querySelector('.product-add tbody');
+
+        let arrayAdicionados = new Array();
+        let arrayRemovidos = new Array();
+
+        arrayAdicionados = JSON.parse(localStorage.getItem("listaProdutos"));
+        arrayRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"));
+
+        let id = arrayAdicionados.length + arrayRemovidos.length + 1;
+        let check = false;
         const item = {
             produto,
-            quantidade
-        };
-        arrayTemporario = JSON.parse(localStorage.getItem("listaProdutos"));
-        arrayTemporario.push(item);
-        localStorage.setItem("listaProdutos", JSON.stringify(arrayTemporario));
-        mostrarMensagem(arrayTemporario.length);
-        adicionarNaTabela(item);
+            quantidade,
+            check,
+            id
+        }
+        arrayAdicionados.push(item);
+        localStorage.setItem("listaProdutos", JSON.stringify(arrayAdicionados));
+        mostrarMensagem(arrayAdicionados.length);
+        adicionarNaTabela(tableAdd, item);
+    }
+
+    document.querySelector('.product-add').addEventListener('change', () => {
+        let lista = document.querySelectorAll('td input');
+        lista.forEach((teste) => {
+            console.log(teste.checked)
+            if (teste.checked) {
+                let id = teste.getAttribute('data-id');
+                alterandoTrue(id);
+            } 
+        })
+    });
+
+    document.querySelector('.product-deleted').addEventListener('change', () => {
+        let lista = document.querySelectorAll('td input');
+        lista.forEach((teste) => {
+            console.log(teste.checked)
+            if (teste.checked == false) {
+                let id = teste.getAttribute('data-id');
+                alterandoFalse(id);
+            } 
+        })
+    });
+
+    function alterandoTrue(id) {
+        console.log('TRUE');
+        let listaProdutos = new Array();
+        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
+
+        let listaRemovidos = new Array();
+        listaRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"))
+
+        let achou = listaProdutos.find((chave) => chave.id == id);
+        console.log(achou);
+        var index = listaProdutos.indexOf(achou);
+        if (index > -1) {
+            listaProdutos.splice(index, 1);
+            localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+            achou.check = true;
+            listaRemovidos.push(achou);
+    
+            console.log(listaRemovidos);
+            localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
+        }
+    }
+
+    function alterandoFalse(id) {
+        console.log('FALSE');
+        let listaProdutos = new Array();
+        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
+
+        let listaRemovidos = new Array();
+        listaRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"))
+
+        let achou = listaRemovidos.find((chave) => chave.id == id);
+
+        var index = listaRemovidos.indexOf(achou);
+
+        if (index > -1) {
+            listaRemovidos.splice(index, 1);
+            localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
+            achou.check = false;
+            listaProdutos.push(achou);
+
+            listaProdutos.sort((itemA, itemB) => {
+                return (itemA.id > itemB.id) ? 1 : ((itemB.id > itemA.id) ? -1 : 0);
+            });
+            localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+        }
     }
 
 });

@@ -6,13 +6,13 @@ export {
 /** Cria um td (celula) para adicionar o checkbox, cria e adiciona o 
  * checkbox no td(celula), chamando uma função para criar o checkbox 
  * e dar o tipo do input e adiciona o mesmo na linha */
-function adicionarNaTabela(item) {
-    let corpoTabela = document.querySelector('.product-add-table tbody');
+function adicionarNaTabela(lista, item) {
+    let corpoTabela = lista;
     let linha = criarElemento('tr');
     let celula;
     
     celula = criarElemento('td');
-    integrarElemento(celula, criarCheckbox());
+    integrarElemento(celula, criarCheckbox(item));
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
@@ -38,8 +38,16 @@ function integrarElemento(ondeAdicionar, elemento) {
     return ondeAdicionar.appendChild(elemento);
 }
 
-function criarCheckbox() {
+function criarCheckbox(item) {
     let checkbox = criarElemento('input');
     checkbox.type = 'checkbox';
+    checkbox.setAttribute('data-id', item.id);
+    
+    if (item.check == true) {
+        checkbox.checked = true;
+    } else {
+        checkbox.checked = false;
+    }
+
     return checkbox;
 }
