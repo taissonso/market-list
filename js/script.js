@@ -30,6 +30,11 @@ window.addEventListener("load", () => {
     function carregarLista() {
         let listProduct = JSON.parse(localStorage.getItem("listaProdutos"));
         let listDeleted = JSON.parse(localStorage.getItem("listaRemovidos"));
+        $('.product-add tbody').empty();
+        $('.product-deleted tbody').empty();;
+
+        
+        
         mostrarMensagem(listProduct.length);
 
         let tabelaAdd = document.querySelector('.product-add tbody');
@@ -112,7 +117,7 @@ window.addEventListener("load", () => {
     document.querySelector('.product-add').addEventListener('change', () => {
         let lista = document.querySelectorAll('td input');
         lista.forEach((teste) => {
-            console.log(teste.checked)
+            // console.log(teste.checked)
             if (teste.checked) {
                 let id = teste.getAttribute('data-id');
                 alterandoTrue(id);
@@ -123,7 +128,7 @@ window.addEventListener("load", () => {
     document.querySelector('.product-deleted').addEventListener('change', () => {
         let lista = document.querySelectorAll('td input');
         lista.forEach((teste) => {
-            console.log(teste.checked)
+            // console.log(teste.checked)
             if (teste.checked == false) {
                 let id = teste.getAttribute('data-id');
                 alterandoFalse(id);
@@ -132,7 +137,7 @@ window.addEventListener("load", () => {
     });
 
     function alterandoTrue(id) {
-        console.log('TRUE');
+        // console.log('TRUE');
         let listaProdutos = new Array();
         listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
 
@@ -140,7 +145,7 @@ window.addEventListener("load", () => {
         listaRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"))
 
         let achou = listaProdutos.find((chave) => chave.id == id);
-        console.log(achou);
+        // console.log(achou);
         var index = listaProdutos.indexOf(achou);
         if (index > -1) {
             listaProdutos.splice(index, 1);
@@ -148,13 +153,14 @@ window.addEventListener("load", () => {
             achou.check = true;
             listaRemovidos.push(achou);
     
-            console.log(listaRemovidos);
+            // console.log(listaRemovidos);
             localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
+            carregarLista();
         }
     }
 
     function alterandoFalse(id) {
-        console.log('FALSE');
+        // console.log('FALSE');
         let listaProdutos = new Array();
         listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
 
@@ -175,6 +181,8 @@ window.addEventListener("load", () => {
                 return (itemA.id > itemB.id) ? 1 : ((itemB.id > itemA.id) ? -1 : 0);
             });
             localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
+
+            carregarLista();
         }
     }
 
