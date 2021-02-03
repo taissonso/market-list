@@ -10,7 +10,8 @@ function adicionarNaTabela(lista, item) {
     let corpoTabela = lista;
     let linha = criarElemento('tr');
     let celula;
-    
+    let botao;
+
     celula = criarElemento('td');
     integrarElemento(celula, criarCheckbox(item));
     integrarElemento(linha, celula);
@@ -25,8 +26,18 @@ function adicionarNaTabela(lista, item) {
     }else {
         celula.innerHTML = item.quantidade;
     }
-
     integrarElemento(linha, celula);
+
+    celula = criarElemento('td');
+    botao = criarBotao('edit-'+item.id, 'editar');
+    integrarElemento(celula, botao);
+    integrarElemento(linha, celula);
+
+    celula = criarElemento('td');
+    botao = criarBotao('delet-'+item.id, 'deletar');
+    integrarElemento(celula, botao);
+    integrarElemento(linha, celula);
+
     integrarElemento(corpoTabela, linha);
 }
 
@@ -48,6 +59,13 @@ function criarCheckbox(item) {
     } else {
         checkbox.checked = false;
     }
-
     return checkbox;
+}
+
+function criarBotao(id, nome){
+    let botao = criarElemento('button');
+    botao.id = id;
+    botao.className = 'btn-' + nome;
+    botao.innerHTML = nome;
+    return botao;
 }
