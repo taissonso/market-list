@@ -25,20 +25,20 @@ window.addEventListener("load", () => {
 
     /** Pega lista do localStorage
      * Chama a função 'mostrarMensagem' para tratar a mensagem de lista vazia.
+     * Limpa as tabela e carrega elas para não precisar fazer reload em toda a
+     * página
      * Chama a função para adicionar na tabela usando o for..of
      */
     function carregarLista() {
         let listProduct = JSON.parse(localStorage.getItem("listaProdutos"));
         let listDeleted = JSON.parse(localStorage.getItem("listaRemovidos"));
+        let tabelaAdd = document.querySelector('.product-add tbody');
+        let tabelaDeleted = document.querySelector('.product-deleted tbody');
+
         $('.product-add tbody').empty();
         $('.product-deleted tbody').empty();;
 
-        
-        
         mostrarMensagem(listProduct.length);
-
-        let tabelaAdd = document.querySelector('.product-add tbody');
-        let tabelaDeleted = document.querySelector('.product-deleted tbody');
 
         for (let chave of listProduct) {
             adicionarNaTabela(tabelaAdd, chave);
@@ -70,6 +70,7 @@ window.addEventListener("load", () => {
         let produto = document.getElementById("product").value;
         let quantidade = document.getElementById("quantity").value;
         let span = document.getElementById('error');
+
         if (produto.trim() == '') {
             span.style.visibility = 'visible';
         } else {
@@ -77,7 +78,7 @@ window.addEventListener("load", () => {
             adicionarItem(produto, quantidade);
         }
 
-        document.querySelector('form').reset();
+        document.querySelector('.form-principal').reset();
         ev.preventDefault();
     });
 
@@ -93,14 +94,10 @@ window.addEventListener("load", () => {
      */
     function adicionarItem(produto, quantidade) {
         let tableAdd = document.querySelector('.product-add tbody');
-
         let arrayAdicionados = new Array();
-        let arrayRemovidos = new Array();
-
         arrayAdicionados = JSON.parse(localStorage.getItem("listaProdutos"));
-        arrayRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"));
 
-        let id = arrayAdicionados.length + arrayRemovidos.length + 1;
+        let id = gerarID();
         let check = false;
         const item = {
             produto,
@@ -114,76 +111,161 @@ window.addEventListener("load", () => {
         adicionarNaTabela(tableAdd, item);
     }
 
+    /** Gera o id do produto conforme o tamanho da lista. Verifica qual o id mais alto
+     * entre os dois arrays de objetos e soma mais 1 ao final dessa verificação
+     */
+    function gerarID() {
+        let arrayAdicionados = JSON.parse(localStorage.getItem("listaProdutos"));
+        let arrayRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"));
+        let idAdicionados = 0;
+        let idRemovidos = 0;
+        let maior = 0;
+
+        for (let objeto of arrayAdicionados) {
+            if (objeto.id > idAdicionados) {
+                idAdicionados = objeto.id;
+            }
+        }
+
+        for (let objeto of arrayRemovidos) {
+            if (objeto.id > idRemovidos) {
+                idRemovidos = objeto.id;
+            }
+        }
+        maior = Math.max(idAdicionados, idRemovidos);
+        return maior + 1;
+    }
+
+    /** Verifica alguma mudança na tabela e verifica qual checkbox teve mudança no 
+     * atributo checked
+     */
     document.querySelector('.product-add').addEventListener('change', () => {
         let lista = document.querySelectorAll('td input');
-        lista.forEach((teste) => {
-            // console.log(teste.checked)
-            if (teste.checked) {
-                let id = teste.getAttribute('data-id');
+        lista.forEach((checkbox) => {
+            if (checkbox.checked) {
+                let id = checkbox.getAttribute('data-id');
                 alterandoTrue(id);
-            } 
+            }
         })
     });
 
+
+    /** Verifica alguma mudança na tabela e verifica qual checkbox teve mudança no 
+     * atributo checked
+     */
     document.querySelector('.product-deleted').addEventListener('change', () => {
         let lista = document.querySelectorAll('td input');
-        lista.forEach((teste) => {
-            // console.log(teste.checked)
-            if (teste.checked == false) {
-                let id = teste.getAttribute('data-id');
+        lista.forEach((checkbox) => {
+            if (checkbox.checked == false) {
+                let id = checkbox.getAttribute('data-id');
                 alterandoFalse(id);
-            } 
+            }
         })
     });
 
+    /** Altera o status do checkbox e remove o elemento desse array e insere no array
+     * de elementos concluidos
+     */
     function alterandoTrue(id) {
-        // console.log('TRUE');
         let listaProdutos = new Array();
-        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
-
         let listaRemovidos = new Array();
+
+        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
         listaRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"))
 
         let achou = listaProdutos.find((chave) => chave.id == id);
-        // console.log(achou);
-        var index = listaProdutos.indexOf(achou);
+        let index = listaProdutos.indexOf(achou);
         if (index > -1) {
             listaProdutos.splice(index, 1);
             localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
             achou.check = true;
             listaRemovidos.push(achou);
-    
-            // console.log(listaRemovidos);
             localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
             carregarLista();
         }
     }
 
+    /** Altera o status do checkbox e remove o elemento desse array e insere no array
+     * de elementos concluidos
+     */
     function alterandoFalse(id) {
-        // console.log('FALSE');
         let listaProdutos = new Array();
-        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
-
         let listaRemovidos = new Array();
+
+        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
         listaRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"))
 
         let achou = listaRemovidos.find((chave) => chave.id == id);
 
-        var index = listaRemovidos.indexOf(achou);
-
+        let index = listaRemovidos.indexOf(achou);
         if (index > -1) {
             listaRemovidos.splice(index, 1);
             localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
             achou.check = false;
             listaProdutos.push(achou);
-
             listaProdutos.sort((itemA, itemB) => {
                 return (itemA.id > itemB.id) ? 1 : ((itemB.id > itemA.id) ? -1 : 0);
             });
             localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
-
             carregarLista();
         }
     }
 
+    $('.product-add').on("click", ".btn-deletar", (botao) => {
+        deletarItem(botao, 'listaProdutos');
+    });
+
+    $('.product-deleted').on("click", ".btn-deletar", (botao) => {
+        deletarItem(botao, 'listaRemovidos');
+    });
+
+    function deletarItem(botao, lista) {
+        let listaObjetos = JSON.parse(localStorage.getItem(lista));
+        let idAchado = botao.currentTarget.id;
+
+        idAchado = idAchado.replace(/([^\d])+/gim, '');
+        let achou = listaObjetos.find((chave) => chave.id == idAchado);
+        let index = listaObjetos.indexOf(achou);
+        if (index > -1) {
+            listaObjetos.splice(index, 1);
+            localStorage.setItem(lista, JSON.stringify(listaObjetos));
+            carregarLista();
+        }
+    }
+
+    $('.product-add').on("click", ".btn-editar", (botao) => {
+        editarItem(botao, 'listaProdutos');
+    });
+
+    $('.product-deleted').on("click", ".btn-editar", (botao) => {
+        editarItem(botao, 'listaRemovidos');
+    });
+
+    function editarItem(botao, lista) {
+        $('#abrirModal').show();
+        let listaObjetos = JSON.parse(localStorage.getItem(lista));
+        let id = botao.currentTarget.id;
+        id = id.replace(/([^\d])+/gim, '');
+        console.log(id)
+
+        let objeto = listaObjetos.find((chave) => chave.id == id);
+        console.log(objeto);
+        document.getElementById('productLabel').value = objeto.produto;
+        document.getElementById('quantityLabel').value = objeto.quantidade;
+        $('#btn-salvar').click( ()=> {
+            objeto.produto = document.getElementById('productLabel').value;
+            objeto.quantidade = document.getElementById('quantityLabel').value;
+            console.log(objeto)
+            localStorage.setItem(lista, JSON.stringify(listaObjetos));
+            $('#abrirModal').hide();
+            document.querySelector('form').reset();
+        });
+        carregarLista();
+
+    }
+
+    $('#btn-cancelar').click(function (ev){
+        ev.preventDefault();
+        $('#abrirModal').hide();
+    });
 });

@@ -12,11 +12,26 @@
 </head>
 
 <body>
+
+    <div id="abrirModal" class="tela-inteira" style="display: none;">
+        <div class="caixa-modal">
+            <form action="">
+                <label for="productLabel">Produto</label>
+                <input type="text" id="productLabel">
+
+                <label for="quantityLabel">Quantidade</label>
+                <input type="text" id="quantityLabel">
+                <button id="btn-salvar">Salvar</button>
+                <button id="btn-cancelar">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
     <header>
         <h1>Market List</h1>
     </header>
 
-    <form action="">
+    <form action="" class="form-principal">
         <label for="product">Produto</label>
         <input type="text" id="product">
 
