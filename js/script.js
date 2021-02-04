@@ -94,8 +94,7 @@ window.addEventListener("load", () => {
      */
     function adicionarItem(produto, quantidade) {
         let tableAdd = document.querySelector('.product-add tbody');
-        let arrayAdicionados = new Array();
-        arrayAdicionados = JSON.parse(localStorage.getItem("listaProdutos"));
+        let arrayAdicionados = JSON.parse(localStorage.getItem("listaProdutos"));
 
         let id = gerarID();
         let check = false;
@@ -136,79 +135,57 @@ window.addEventListener("load", () => {
         return maior + 1;
     }
 
-    /** Verifica alguma mudança na tabela e verifica qual checkbox teve mudança no 
-     * atributo checked
-     */
-    document.querySelector('.product-add').addEventListener('change', () => {
-        let lista = document.querySelectorAll('td input');
-        lista.forEach((checkbox) => {
-            if (checkbox.checked) {
-                let id = checkbox.getAttribute('data-id');
-                alterandoTrue(id);
-            }
-        })
+    /** Pega o input[checkbox] selecionado e manda para a função de alterar status*/
+    $('.product-add').on("click", "input", (input) => {
+        alteraStatus(input);
+    });
+    $('.product-deleted').on("click", "input", (input) => {
+        alteraStatus(input);
     });
 
-
-    /** Verifica alguma mudança na tabela e verifica qual checkbox teve mudança no 
-     * atributo checked
+    /**
+     *  Pega o checkbox que recebeu o click, pega o id dele, remove o nome padrão dos checkbox
+     *  usando regex. 
+     *  No primeiro if faz uma busca com o metodo some() para ver se o id existe no array de 
+     * produtos adicionados. Caso positivo, localiza a posição no array, o remove do mesmo,
+     * atualiza seu status para false e adiciona no array de removidos/concluidos.
+     * Se negativo, procura no array de removidos, se positivo remove do array, 
+     * adiciona no array de produtos, ordena o mesmo e sai do if.
+     * No final atualiza o localStorage e carrega a tabela modificada.  
+     * @param {checkbox que recebeu o click} input 
      */
-    document.querySelector('.product-deleted').addEventListener('change', () => {
-        let lista = document.querySelectorAll('td input');
-        lista.forEach((checkbox) => {
-            if (checkbox.checked == false) {
-                let id = checkbox.getAttribute('data-id');
-                alterandoFalse(id);
+    function alteraStatus(input) {
+        let arrayProdutos = JSON.parse(localStorage.getItem('listaProdutos'));
+        let arrayRemovidos = JSON.parse(localStorage.getItem('listaRemovidos'));
+        let id = input.currentTarget.id;
+        id = id.replace(/([^\d])+/gim, '');
+        
+        if (arrayProdutos.some((objeto) => objeto.id == id)) {
+            let adicionado = arrayProdutos.find((objeto) => objeto.id == id);
+            let index = arrayProdutos.indexOf(adicionado);
+            if (index > -1) {
+                arrayProdutos.splice(index, 1);
+                adicionado.check = true;
+                arrayRemovidos.push(adicionado);
             }
-        })
-    });
-
-    /** Altera o status do checkbox e remove o elemento desse array e insere no array
-     * de elementos concluidos
-     */
-    function alterandoTrue(id) {
-        let listaProdutos = new Array();
-        let listaRemovidos = new Array();
-
-        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
-        listaRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"))
-
-        let achou = listaProdutos.find((chave) => chave.id == id);
-        let index = listaProdutos.indexOf(achou);
-        if (index > -1) {
-            listaProdutos.splice(index, 1);
-            localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
-            achou.check = true;
-            listaRemovidos.push(achou);
-            localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
-            carregarLista();
+        } else {
+            if (arrayRemovidos.some((objeto) => objeto.id == id)) {
+                let removido = arrayRemovidos.find((objeto) => objeto.id == id);
+                let index = arrayRemovidos.indexOf(removido);
+                if (index > -1) {
+                    arrayRemovidos.splice(index, 1);
+                    removido.check = false;
+                    arrayProdutos.push(removido);
+                    arrayProdutos.sort((itemA, itemB) => {
+                        return (itemA.id > itemB.id) ? 1 : ((itemB.id > itemA.id) ? -1 : 0);
+                    });
+                }
+            }
         }
-    }
 
-    /** Altera o status do checkbox e remove o elemento desse array e insere no array
-     * de elementos concluidos
-     */
-    function alterandoFalse(id) {
-        let listaProdutos = new Array();
-        let listaRemovidos = new Array();
-
-        listaProdutos = JSON.parse(localStorage.getItem("listaProdutos"));
-        listaRemovidos = JSON.parse(localStorage.getItem("listaRemovidos"))
-
-        let achou = listaRemovidos.find((chave) => chave.id == id);
-
-        let index = listaRemovidos.indexOf(achou);
-        if (index > -1) {
-            listaRemovidos.splice(index, 1);
-            localStorage.setItem("listaRemovidos", JSON.stringify(listaRemovidos));
-            achou.check = false;
-            listaProdutos.push(achou);
-            listaProdutos.sort((itemA, itemB) => {
-                return (itemA.id > itemB.id) ? 1 : ((itemB.id > itemA.id) ? -1 : 0);
-            });
-            localStorage.setItem("listaProdutos", JSON.stringify(listaProdutos));
-            carregarLista();
-        }
+        localStorage.setItem("listaRemovidos", JSON.stringify(arrayRemovidos));
+        localStorage.setItem("listaProdutos", JSON.stringify(arrayProdutos));
+        carregarLista();
     }
 
     $('.product-add').on("click", ".btn-deletar", (botao) => {
@@ -219,6 +196,13 @@ window.addEventListener("load", () => {
         deletarItem(botao, 'listaRemovidos');
     });
 
+    /**
+     * Deleta o item que foi clicado.
+     *  
+     * @param {Botão que foi clicado na chamada da função} botao 
+     * @param {Qual lista que vai ser buscado o id do item a ser deletado} lista 
+     * 
+     */
     function deletarItem(botao, lista) {
         let listaObjetos = JSON.parse(localStorage.getItem(lista));
         let idAchado = botao.currentTarget.id;
@@ -233,6 +217,7 @@ window.addEventListener("load", () => {
         }
     }
 
+    /** Saber qual das tabelas foi clicadas e passar o nome da lista e o botão para a função */
     $('.product-add').on("click", ".btn-editar", (botao) => {
         editarItem(botao, 'listaProdutos');
     });
@@ -240,32 +225,53 @@ window.addEventListener("load", () => {
     $('.product-deleted').on("click", ".btn-editar", (botao) => {
         editarItem(botao, 'listaRemovidos');
     });
-
+    /**
+     * Ao chamar a função abre o modal, pega a lista passada para buscar o elemento,
+     * tranforma o id para o padrão de busca usando regex, localiza o mesmo usando o 
+     * metodo find, adiciona os valores do objeto nos input's do modal, fica escutando
+     * o click no botão de Salvar. Caso positivo altera o objeto, atualiza o localStorage,
+     * oculta o modal, reseta o form do modal, para não ficar com o último elemento editado
+     * salvo no cache e por fim atualiza a tabela. 
+     * 
+     * @param {Botão que foi clicado na tabela} botao 
+     * @param {Saber qual lista do localStorage usar} lista 
+     * 
+     */
     function editarItem(botao, lista) {
         $('#abrirModal').show();
         let listaObjetos = JSON.parse(localStorage.getItem(lista));
         let id = botao.currentTarget.id;
         id = id.replace(/([^\d])+/gim, '');
-        console.log(id)
 
         let objeto = listaObjetos.find((chave) => chave.id == id);
-        console.log(objeto);
+
         document.getElementById('productLabel').value = objeto.produto;
         document.getElementById('quantityLabel').value = objeto.quantidade;
-        $('#btn-salvar').click( ()=> {
-            objeto.produto = document.getElementById('productLabel').value;
-            objeto.quantidade = document.getElementById('quantityLabel').value;
-            console.log(objeto)
-            localStorage.setItem(lista, JSON.stringify(listaObjetos));
-            $('#abrirModal').hide();
-            document.querySelector('form').reset();
+        $('#btn-salvar').click((ev) => {
+            let produto = document.getElementById('productLabel').value;
+            console.log(produto)
+            let span = document.getElementById('errorModal');
+            if (produto.trim() == ''){
+                span.style.visibility = 'visible';
+                ev.preventDefault();
+            } else {
+                objeto.produto = produto;
+                objeto.quantidade = document.getElementById('quantityLabel').value;
+                localStorage.setItem(lista, JSON.stringify(listaObjetos));
+            }
         });
-        carregarLista();
-
     }
 
-    $('#btn-cancelar').click(function (ev){
+    /** Se clicado no botão cancelar do modal, fecha o mesmo. */
+    $('#btn-cancelar').click(function (ev) {
         ev.preventDefault();
         $('#abrirModal').hide();
     });
+
+    $('.fechar').click(function (ev) {
+        ev.preventDefault();
+        $('#abrirModal').hide();
+    });
+
+
 });

@@ -13,7 +13,7 @@ function adicionarNaTabela(lista, item) {
     let botao;
 
     celula = criarElemento('td');
-    integrarElemento(celula, criarCheckbox(item));
+    integrarElemento(celula, criarCheckbox(item, 'check-'+item.id));
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
@@ -49,10 +49,10 @@ function integrarElemento(ondeAdicionar, elemento) {
     return ondeAdicionar.appendChild(elemento);
 }
 
-function criarCheckbox(item) {
+function criarCheckbox(item, id) {
     let checkbox = criarElemento('input');
     checkbox.type = 'checkbox';
-    checkbox.setAttribute('data-id', item.id);
+    checkbox.id = id;
     
     if (item.check == true) {
         checkbox.checked = true;

@@ -15,14 +15,18 @@
 
     <div id="abrirModal" class="tela-inteira" style="display: none;">
         <div class="caixa-modal">
+            <span class="fechar">X</span>
             <form action="">
                 <label for="productLabel">Produto</label>
                 <input type="text" id="productLabel">
 
                 <label for="quantityLabel">Quantidade</label>
                 <input type="text" id="quantityLabel">
+                
                 <button id="btn-salvar">Salvar</button>
                 <button id="btn-cancelar">Cancelar</button>
+                
+                <span id="errorModal" style="visibility:hidden">* Campo Produto está vazio!</span>
             </form>
         </div>
     </div>
