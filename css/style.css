@@ -7,6 +7,7 @@
 body {
   background-color: red;
   height: 100vh;
+  background-image: url("/img/fundo-03.jpg");
 }
 
 header {
@@ -14,15 +15,18 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("/img/foto-01.png");
 }
 header h1 {
-  font-size: 64px;
-  color: #ffffff;
+  font-size: 82px;
+  color: black;
+  border: 5px solid black;
+}
+header img {
+  position: relative;
+  margin-top: 40px;
 }
 
 main {
-  background-color: yellow;
   display: flex;
   flex-direction: column;
   align-items: center;
