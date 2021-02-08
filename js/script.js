@@ -49,14 +49,20 @@ window.addEventListener("load", () => {
         }
     }
 
-    /** Muda o CSS do span para mostrar a mensagem ou não na lista*/
+    /** Muda o CSS do span para mostrar a mensagem ou não na lista e o botão de exluir
+     * a tabela. 
+    */
     function mostrarMensagem(tamanhoLista) {
         let span = document.getElementById('lista-vazia');
-        if (tamanhoLista > 0) {
-            span.style.display = 'none';
-        } else {
+        let arrayRemovidos = JSON.parse(localStorage.getItem('listaRemovidos'));
+        let botao = document.getElementById('delete-list');
+        
+       if(tamanhoLista == 0) {
             span.style.display = 'flex';
+        } else {
+            span.style.display = 'none';
         }
+        
     }
 
     /**
@@ -135,7 +141,7 @@ window.addEventListener("load", () => {
         return maior + 1;
     }
 
-    /** Pega o input[checkbox] selecionado e manda para a função de alterar status*/
+    /** Pega o input[checkbox] selecionado e manda para a função alteraStatus*/
     $('.product-add').on("click", "input", (input) => {
         alteraStatus(input);
     });
@@ -188,6 +194,9 @@ window.addEventListener("load", () => {
         carregarLista();
     }
 
+    /** Fica escutando o clique nas tabelas para a chamada da função deletarItem,
+     * passa o botao como parâmetro. 
+     */
     $('.product-add').on("click", ".btn-deletar", (botao) => {
         deletarItem(botao, 'listaProdutos');
     });
@@ -197,7 +206,9 @@ window.addEventListener("load", () => {
     });
 
     /**
-     * Deleta o item que foi clicado.
+     * Deleta o item que foi clicado. Procura o id com o metodo find, localiza ele
+     * com o metodo indexOf e remove ele com o metodo splice, atualiza o localstorage 
+     * e atualiza a tabela.
      *  
      * @param {Botão que foi clicado na chamada da função} botao 
      * @param {Qual lista que vai ser buscado o id do item a ser deletado} lista 
@@ -249,7 +260,6 @@ window.addEventListener("load", () => {
         document.getElementById('quantityLabel').value = objeto.quantidade;
         $('#btn-salvar').click((ev) => {
             let produto = document.getElementById('productLabel').value;
-            console.log(produto)
             let span = document.getElementById('errorModal');
             if (produto.trim() == ''){
                 span.style.visibility = 'visible';
@@ -273,5 +283,15 @@ window.addEventListener("load", () => {
         $('#abrirModal').hide();
     });
 
+    /**Quando a lista de produtos adicionados estiver vazia e a lista de concluidos
+     * estiver com mais de um item selecionado aparece o botão de deletar a lista
+     * então limpa o localstorage, limpa as listas e cria novos vetores no localstorage
+     */
+    $('#delete-list').click(()=> {
+        localStorage.clear();
+        $('.product-add tbody').empty();
+        $('.product-deleted tbody').empty();
+        criarLista();
+    });
 
 });

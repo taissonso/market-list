@@ -1,5 +1,8 @@
 # market-list
-Se trata de uma lista de compras para supermercado/feira. 
+    Se trata de uma lista de compras para supermercado/feira. A medida que se insere os itens, os
+    mesmos serão mostrados em uma tabela, com a descrição e quantidade inseridos, juntos com dois botões para editar e deletar o mesmo. No primeiro campo de cada item terá um checkbox para 
+    marcar item quando concluido. Quando concluido os itens irão para o final da tabela.
+    Quando os itens adicionados terminam um botão de deletar a lista é mostrado ao final da tabela.   
 
     -- A lista de compras será salva no localStorage, ao carregar a página verifica se já existe 
     uma lista no localStorage. 
@@ -22,8 +25,10 @@ Se trata de uma lista de compras para supermercado/feira.
         - Se for clicado quando 'true' ativo retorna o item para a sua posição
         original com o checkbox em 'false'.
 
-    -- Botão Editar: irá abrir um modal para a editar o item/produto selecionado.
+    -- Botão 'Editar': irá abrir um modal para a editar o item/produto selecionado.
 
-    -- Botão Deletar: deleta o item/produto da lista.
+    -- Botão 'Deletar': deleta o item/produto da lista.
 
+    -- Botão 'Limpar Lista': caso queira limpar toda a lista.
+    
     -- Modal: 
