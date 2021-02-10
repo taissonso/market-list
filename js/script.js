@@ -249,7 +249,9 @@ window.addEventListener("load", () => {
      * 
      */
     function editarItem(botao, lista) {
-        $('#abrirModal').show();
+        $('#abrirModal').css({display:"flex"});
+        $('#abrirModal').show('500');
+
         let listaObjetos = JSON.parse(localStorage.getItem(lista));
         let id = botao.currentTarget.id;
         id = id.replace(/([^\d])+/gim, '');
@@ -268,6 +270,7 @@ window.addEventListener("load", () => {
                 objeto.produto = produto;
                 objeto.quantidade = document.getElementById('quantityLabel').value;
                 localStorage.setItem(lista, JSON.stringify(listaObjetos));
+                $('#abrirModal').hide();
             }
         });
     }
@@ -275,12 +278,12 @@ window.addEventListener("load", () => {
     /** Se clicado no botão cancelar do modal, fecha o mesmo. */
     $('#btn-cancelar').click(function (ev) {
         ev.preventDefault();
-        $('#abrirModal').hide();
+        $('#abrirModal').hide("800");
     });
 
     $('.fechar').click(function (ev) {
         ev.preventDefault();
-        $('#abrirModal').hide();
+        $('#abrirModal').hide("800");
     });
 
     /**Quando a lista de produtos adicionados estiver vazia e a lista de concluidos
