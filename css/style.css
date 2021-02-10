@@ -4,8 +4,15 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Gotham";
+  src: url("../../fonts/Gotham/GothamPro-Medium.ttf");
+}
+@font-face {
+  font-family: "Cinematografica";
+  src: url("../../fonts/cinematografica/Cinematografica-Extrabold-trial.ttf");
+}
 body {
-  background-color: red;
   height: 100vh;
   background-image: url("/img/fundo-03.jpg");
 }
@@ -15,15 +22,19 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 50%;
+  margin-left: 25%;
 }
 header h1 {
-  font-size: 82px;
+  font-family: "Cinematografica";
+  font-size: 10.248vw;
+  font-weight: lighter;
   color: black;
-  border: 5px solid black;
+  text-shadow: -2px 2px #0d70f1;
+  letter-spacing: 4px;
 }
-header img {
+header #carrinho {
   position: relative;
-  margin-top: 40px;
 }
 
 main {
@@ -31,111 +42,158 @@ main {
   flex-direction: column;
   align-items: center;
   min-height: 72vh;
-  padding-top: 5vh;
   padding-bottom: 5vh;
 }
 main form {
-  background-color: blue;
-  height: 18vh;
+  background-color: #dadada;
+  height: 20vh;
   width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: 5px 2px 10px #0f0f0f8a, 0px -5px 10px #0f0f0f8a, -5px 2px 10px #0f0f0f8a, 5px -5px 10px #0f0f0f8a, -5px -5px 10px #0f0f0f8a;
 }
 main form fieldset {
   border: none;
 }
 main form .entradas {
   width: 90%;
-  background-color: pink;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+main form .entradas #campo-product {
+  display: flex;
+  flex-direction: column;
+}
+main form .entradas #campo-quantity {
+  display: flex;
+  flex-direction: column;
+}
+main form .entradas label {
+  font-family: "Gotham";
+  padding-bottom: 2px;
 }
 main form .entradas input {
   height: 25px;
+  width: 200px;
 }
-main form #error {
+main form .entradas #error {
+  display: inline-block;
+  align-items: flex-start;
+  justify-content: flex-start;
   visibility: hidden;
-  width: 90%;
-  height: 20px;
+  height: 12px;
+  font-family: "Gotham";
   color: #ff0000;
-  font-size: 14px;
-  background-color: black;
+  font-size: 12px;
   padding-top: 2px;
 }
 main form .botoes {
-  width: 70%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding-top: 10px;
 }
 main form .botoes button {
+  font-family: "Gotham";
+  text-transform: uppercase;
   height: 30px;
-  width: 150px;
+  width: 200px;
+  border: none;
+  box-shadow: -2px 2px black;
+  border-radius: 20px;
+}
+main form #btn-enviar {
+  background-color: #0d70f1;
+  box-shadow: 0 5px 0 #422626;
+  color: #ffffff;
+}
+main form #btn-enviar:hover {
+  background-color: #0d70f1;
+  color: #ffffff;
+  box-shadow: 0 5px 0 #125dc0;
+}
+main form #delete-list {
+  background-color: #ff0808;
+  box-shadow: 0 5px 0 #422626;
+  color: #ffffff;
+}
+main form #delete-list:hover {
+  background-color: #ff0808;
+  color: #000000;
+  box-shadow: 0 5px 0 #ff6464;
+}
+main form #btn-enviar:active, main form #delete-list:active {
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+main form :focus {
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
 }
 
 .list {
-  background-color: cadetblue;
+  background-color: #DADADA;
   width: 50vw;
   min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  box-shadow: 5px 2px 1px black, -5px 2px 1px black, 0px 5px 1px black, -5px 5px 1px red, 5px 5px 1px #f700ff;
+  box-shadow: 5px 0px 10px #0f0f0f8a, -5px 0px 10px #0f0f0f8a, 0px 5px 10px #0f0f0f8a, -5px 5px 10px #0f0f0f8a, 5px 5px 10px #0f0f0f8a;
+  font-size: 18px;
+  padding-bottom: 5vh;
+}
+
+.product-add thead th, .product-deleted thead th {
+  border: 1px solid black;
+  height: 40px;
+}
+.product-add thead th:first-child, .product-deleted thead th:first-child {
+  border-left: none;
+  width: 5%;
+}
+.product-add thead th:nth-child(2), .product-deleted thead th:nth-child(2) {
+  width: 40%;
+}
+.product-add thead th:nth-child(3), .product-deleted thead th:nth-child(3) {
+  width: 25%;
+}
+.product-add thead th:nth-child(4), .product-deleted thead th:nth-child(4) {
+  width: 15%;
+}
+.product-add thead th:last-child, .product-deleted thead th:last-child {
+  border-right: none;
+  width: 15%;
+}
+.product-add tbody tr, .product-deleted tbody tr {
+  height: 25px;
+  border-top: none;
+}
+.product-add tbody td:first-child, .product-deleted tbody td:first-child {
+  border-left: none;
+}
+.product-add tbody td:last-child, .product-deleted tbody td:last-child {
+  border-right: none;
 }
 
 .product-add {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 25px;
 }
 .product-add thead {
-  background-color: #0e88ec;
-}
-.product-add thead th {
-  border: 1px solid black;
-  height: 40px;
-}
-.product-add thead th:first-child {
-  background-color: blueviolet;
-  border-left: none;
-  width: 5%;
-}
-.product-add thead th:nth-child(2) {
-  background-color: red;
-  width: 50%;
-}
-.product-add thead th:nth-child(3) {
-  background-color: green;
-  width: 25%;
-}
-.product-add thead th:nth-child(4) {
-  background-color: #f700ff;
-  width: 10%;
-}
-.product-add thead th:last-child {
-  background-color: red;
-  border-right: none;
-  width: 10%;
-}
-.product-add tbody tr {
-  height: 25px;
+  background-color: #4D321A;
+  color: #ffffff;
 }
 .product-add tbody td {
   background-color: white;
   border: 1px solid black;
   text-align: center;
-}
-.product-add tbody td:first-child {
-  border-left: none;
-}
-.product-add tbody td:last-child {
-  border-right: none;
 }
 .product-add tbody input {
   all: unset;
@@ -145,59 +203,47 @@ main form .botoes button {
   display: inline-block;
 }
 .product-add tbody input:hover {
-  background-color: red;
+  background-color: #22cc1c;
 }
 
 #lista-vazia {
+  font-family: "Cinematografica";
   width: 100%;
-  height: 40px;
   align-items: center;
   justify-content: center;
-  font-size: 1.54vw;
+  flex-grow: 1;
+  font-size: 4vw;
   color: #ff0000;
-  background-color: blue;
+  background-color: #DADADA;
   border-top: 2px solid black;
-  border-bottom: 1px solid black;
 }
 
 .product-deleted {
   width: 100%;
   border-collapse: collapse;
 }
-.product-deleted tbody tr {
-  height: 25px;
-  border-top: none;
-}
 .product-deleted tbody tr:first-child {
-  height: 25px;
   border-top: 2px solid black;
 }
 .product-deleted tbody td {
   border: 1px solid black;
   text-align: center;
-  background-color: #7c5c32;
-}
-.product-deleted tbody td:first-child {
-  border-left: none;
-  width: 5%;
+  background-color: #C95614;
 }
 .product-deleted tbody td:nth-child(2) {
-  width: 50%;
+  width: 40%;
   text-decoration: line-through red 2px;
-  color: #8f8f8f;
 }
 .product-deleted tbody td:nth-child(3) {
   width: 25%;
   text-decoration: line-through red 2px;
-  color: #8f8f8f;
 }
 .product-deleted tbody td:nth-child(4) {
-  width: 10%;
+  width: 15%;
 }
 .product-deleted tbody td:last-child {
-  width: 10%;
+  width: 15%;
   border-right: none;
-  width: 10%;
 }
 .product-deleted tbody input {
   all: unset;
@@ -208,7 +254,28 @@ main form .botoes button {
   background-color: white;
 }
 .product-deleted tbody input:checked {
-  background-color: blue;
+  background-color: red;
+}
+
+.btn-editar {
+  font-family: "Gotham";
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  width: 90%;
+  height: 18px;
+  border-radius: 20px;
+  background-color: #008a00;
+}
+.btn-editar:hover {
+  background-color: #ffe600;
+  color: #000000;
+  border: 2px solid #7a7a7a;
+}
+.btn-editar:focus {
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
 }
 
 /*# sourceMappingURL=style.css.map */
