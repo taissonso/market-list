@@ -46,7 +46,7 @@ main {
   padding-bottom: 5vh;
 }
 main form {
-  background-color: #dadada;
+  background-color: #FACCB1;
   height: 20vh;
   width: 50vw;
   display: flex;
@@ -54,6 +54,8 @@ main form {
   align-items: center;
   justify-content: center;
   box-shadow: 5px 2px 10px #0f0f0f8a, 0px -5px 10px #0f0f0f8a, -5px 2px 10px #0f0f0f8a, 5px -5px 10px #0f0f0f8a, -5px -5px 10px #0f0f0f8a;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 main form fieldset {
   border: none;
@@ -142,7 +144,7 @@ main form :focus {
 }
 
 .list {
-  background-color: #DADADA;
+  background-color: #8a5f39;
   width: 50vw;
   min-height: 40vh;
   display: flex;
@@ -151,6 +153,8 @@ main form :focus {
   justify-content: flex-start;
   box-shadow: 5px 0px 10px #0f0f0f8a, -5px 0px 10px #0f0f0f8a, 0px 5px 10px #0f0f0f8a, -5px 5px 10px #0f0f0f8a, 5px 5px 10px #0f0f0f8a;
   font-size: 18px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   padding-bottom: 5vh;
 }
 

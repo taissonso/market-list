@@ -11,13 +11,16 @@ function adicionarNaTabela(lista, item) {
     let linha = criarElemento('tr');
     let celula;
     let botao;
-
+    let label;
     celula = criarElemento('td');
     integrarElemento(celula, criarCheckbox(item, 'check-'+item.id));
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
-    celula.innerHTML = item.produto;
+    label = criarElemento('label');
+    label.setAttribute("for",  "check-" + item.id)
+    label.innerHTML = item.produto;
+    integrarElemento(celula, label);
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
