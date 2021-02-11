@@ -76,10 +76,14 @@ main form .entradas #campo-quantity {
 main form .entradas label {
   font-family: "Gotham";
   padding-bottom: 2px;
+  padding-left: 8px;
 }
 main form .entradas input {
   height: 25px;
   width: 200px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding-left: 10px;
 }
 main form .entradas #error {
   display: inline-block;
@@ -114,8 +118,8 @@ main form #btn-enviar {
 }
 main form #btn-enviar:hover {
   background-color: #0d70f1;
-  color: #ffffff;
-  box-shadow: 0 4px 0 #125dc0;
+  color: #000000;
+  box-shadow: 0 4px 0 #7cb5ff;
 }
 main form #delete-list {
   background-color: #ff0808;
@@ -191,9 +195,9 @@ main form :focus {
   color: #ffffff;
 }
 .product-add tbody td {
-  background-color: white;
   border: 1px solid black;
   text-align: center;
+  background-color: #faccb1;
 }
 .product-add tbody input {
   all: unset;
@@ -209,6 +213,7 @@ main form :focus {
 #lista-vazia {
   font-family: "Cinematografica";
   width: 100%;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-grow: 1;
@@ -318,13 +323,13 @@ main form :focus {
   justify-content: center;
 }
 .tela-inteira .caixa-modal {
-  width: 50vw;
-  height: 65vh;
+  width: 40vw;
+  height: 60vh;
   border-radius: 40px;
   background-color: #4D321A;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   position: relative;
   top: 8vh;
@@ -360,15 +365,120 @@ main form :focus {
   font-size: 52px;
 }
 .tela-inteira #form-modal {
-  width: 100%;
+  width: 80%;
   height: 30vh;
-  background-color: red;
-}
-.tela-inteira form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #faccb1;
+  border-radius: 20px;
+}
+.tela-inteira #form-modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  height: 100%;
+}
+.tela-inteira #form-modal .entradas-modal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.tela-inteira #form-modal .entradas-modal #product-modal {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+.tela-inteira #form-modal .entradas-modal #quantity-modal {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding-top: 10px;
+}
+.tela-inteira #form-modal .entradas-modal label {
+  font-family: "Gotham";
+  padding-bottom: 2px;
+}
+.tela-inteira #form-modal .entradas-modal input {
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  height: 25px;
+  width: 100%;
+  padding-left: 10px;
+}
+.tela-inteira #form-modal .entradas-modal #errorModal {
+  display: inline-block;
+  align-items: flex-start;
+  justify-content: flex-start;
+  visibility: hidden;
+  height: 16px;
+  font-family: "Gotham";
+  color: #ff0000;
+  font-size: 12px;
+  padding-top: 2px;
+}
+.tela-inteira #form-modal .btns-modal {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.tela-inteira #form-modal .btns-modal button {
+  font-family: "Gotham";
+  text-transform: uppercase;
+  height: 25px;
+  width: 100px;
+  border: none;
+  border-radius: 20px;
+}
+.tela-inteira #form-modal fieldset {
+  border: none;
+}
+.tela-inteira #form-modal #btn-salvar {
+  background-color: #0d70f1;
+  box-shadow: 0 4px 0 #422626;
+  color: #ffffff;
+}
+.tela-inteira #form-modal #btn-salvar:hover {
+  background-color: #0d70f1;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #7cb5ff;
+  color: #000000;
+}
+.tela-inteira #form-modal #btn-deletar {
+  background-color: #ff0808;
+  box-shadow: 0 4px 0 #422626;
+  color: #ffffff;
+}
+.tela-inteira #form-modal #btn-deletar:hover {
+  background-color: #ff0808;
+  color: #000000;
+  box-shadow: 0 5px 0 #ff6464;
+}
+.tela-inteira #form-modal #btn-cancelar {
+  background-color: #fffb00;
+  box-shadow: 0 4px 0 #422626;
+  color: #000000;
+}
+.tela-inteira #form-modal #btn-cancelar:hover {
+  background-color: #ff8800;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #ffb374;
+  color: #ffffff;
+}
+.tela-inteira #form-modal #btn-salvar:active, .tela-inteira #form-modal #btn-deletar:active, .tela-inteira #form-modal #btn-cancelar:active {
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+.tela-inteira #form-modal :focus {
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px;
 }
 
 /*# sourceMappingURL=style.css.map */

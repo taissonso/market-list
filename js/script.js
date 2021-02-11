@@ -51,18 +51,16 @@ window.addEventListener("load", () => {
 
     /** Muda o CSS do span para mostrar a mensagem ou não na lista e o botão de exluir
      * a tabela. 
-    */
+     */
     function mostrarMensagem(tamanhoLista) {
         let span = document.getElementById('lista-vazia');
-        let arrayRemovidos = JSON.parse(localStorage.getItem('listaRemovidos'));
-        let botao = document.getElementById('delete-list');
-        
-       if(tamanhoLista == 0) {
-            span.style.display = 'flex';
-        } else {
+
+        if (tamanhoLista > 0) {
             span.style.display = 'none';
+        } else {
+            span.style.display = 'flex';
         }
-        
+
     }
 
     /**
@@ -165,7 +163,7 @@ window.addEventListener("load", () => {
         let arrayRemovidos = JSON.parse(localStorage.getItem('listaRemovidos'));
         let id = input.currentTarget.id;
         id = id.replace(/([^\d])+/gim, '');
-        
+
         if (arrayProdutos.some((objeto) => objeto.id == id)) {
             let adicionado = arrayProdutos.find((objeto) => objeto.id == id);
             let index = arrayProdutos.indexOf(adicionado);
@@ -243,14 +241,15 @@ window.addEventListener("load", () => {
      * o click no botão de Salvar. Caso positivo altera o objeto, atualiza o localStorage,
      * oculta o modal, reseta o form do modal, para não ficar com o último elemento editado
      * salvo no cache e por fim atualiza a tabela. 
+     * Botão deletar, foi colocado caso se queira deletar o produto da lista. 
      * 
      * @param {Botão que foi clicado na tabela} botao 
      * @param {Saber qual lista do localStorage usar} lista 
      * 
      */
     function editarItem(botao, lista) {
+        $('#abrirModal').show(600);
         $('#abrirModal').css({display:"flex"});
-        $('#abrirModal').show('500');
 
         let listaObjetos = JSON.parse(localStorage.getItem(lista));
         let id = botao.currentTarget.id;
@@ -260,41 +259,58 @@ window.addEventListener("load", () => {
 
         document.getElementById('productLabel').value = objeto.produto;
         document.getElementById('quantityLabel').value = objeto.quantidade;
+        
         $('#btn-salvar').click((ev) => {
             let produto = document.getElementById('productLabel').value;
             let span = document.getElementById('errorModal');
-            if (produto.trim() == ''){
+            if (produto.trim() == '') {
                 span.style.visibility = 'visible';
                 ev.preventDefault();
             } else {
                 objeto.produto = produto;
                 objeto.quantidade = document.getElementById('quantityLabel').value;
                 localStorage.setItem(lista, JSON.stringify(listaObjetos));
-                $('#abrirModal').hide();
+                carregarLista();
+                $('#abrirModal').hide(600);
+                ev.preventDefault();
             }
+           
         });
+
+        $('#btn-deletar').click((ev) => {
+            let index = listaObjetos.indexOf(objeto);
+            if (index > -1) {
+                listaObjetos.splice(index, 1);
+                localStorage.setItem(lista, JSON.stringify(listaObjetos));
+                carregarLista();
+                $('#abrirModal').hide(900);
+                ev.preventDefault();
+            }
+            
+        })
     }
 
     /** Se clicado no botão cancelar do modal, fecha o mesmo. */
     $('#btn-cancelar').click(function (ev) {
         ev.preventDefault();
-        $('#abrirModal').hide("800");
+        $('#abrirModal').hide(600);
     });
 
     $('.fechar').click(function (ev) {
-        ev.preventDefault();
-        $('#abrirModal').hide("800");
+       $('#abrirModal').hide(600);
+       ev.preventDefault();
     });
 
     /**Quando a lista de produtos adicionados estiver vazia e a lista de concluidos
      * estiver com mais de um item selecionado aparece o botão de deletar a lista
      * então limpa o localstorage, limpa as listas e cria novos vetores no localstorage
      */
-    $('#delete-list').click(()=> {
+    $('#delete-list').click((ev) => {
         localStorage.clear();
         $('.product-add tbody').empty();
         $('.product-deleted tbody').empty();
         criarLista();
+        ev.preventDefault();
     });
 
 });

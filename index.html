@@ -27,13 +27,23 @@
             
             <div id="form-modal">
                 <form action="">
-                    <label for="productLabel">Produto</label>
-                    <input type="text" id="productLabel">
-                    <label for="quantityLabel">Quantidade</label>
-                    <input type="text" id="quantityLabel">
-                    <button id="btn-salvar">Salvar</button>
-                    <button id="btn-cancelar">Cancelar</button>
-                    <span id="errorModal" style="visibility:hidden">* Campo Produto está vazio!</span>
+                    <fieldset class="entradas-modal">
+                        <fieldset id="product-modal">
+                            <label for="productLabel">Produto</label>
+                            <input type="text" id="productLabel" maxlength="25">
+                            <span id="errorModal" style="visibility:hidden">* Campo Produto está vazio!</span>
+                        </fieldset>
+                        <fieldset id="quantity-modal">
+                            <label for="quantityLabel">Quantidade</label>
+                            <input type="text" id="quantityLabel" maxlength="25">
+                        </fieldset>
+                    </fieldset>
+                    
+                    <fieldset class="btns-modal">
+                        <button id="btn-salvar">Salvar</button>
+                        <button id="btn-deletar">Deletar</button>
+                        <button id="btn-cancelar">Cancelar</button>
+                    </fieldset>
                 </form>
             </div>
         </div>
