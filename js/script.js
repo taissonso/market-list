@@ -250,29 +250,35 @@ window.addEventListener("load", () => {
     function editarItem(botao, lista) {
         $('#abrirModal').show(600);
         $('#abrirModal').css({display:"flex"});
-
+        
         let listaObjetos = JSON.parse(localStorage.getItem(lista));
         let id = botao.currentTarget.id;
+        console.log(id)
+        console.log(lista)
         id = id.replace(/([^\d])+/gim, '');
 
         let objeto = listaObjetos.find((chave) => chave.id == id);
-
+        console.log(objeto)
         document.getElementById('productLabel').value = objeto.produto;
         document.getElementById('quantityLabel').value = objeto.quantidade;
         
         $('#btn-salvar').click((ev) => {
+            // console.log(lista)
             let produto = document.getElementById('productLabel').value;
             let span = document.getElementById('errorModal');
             if (produto.trim() == '') {
                 span.style.visibility = 'visible';
                 ev.preventDefault();
             } else {
+                //provavel erro esteja aqui
                 objeto.produto = produto;
                 objeto.quantidade = document.getElementById('quantityLabel').value;
                 localStorage.setItem(lista, JSON.stringify(listaObjetos));
                 carregarLista();
+                // document.querySelector('.form-modal').reset();
                 $('#abrirModal').hide(600);
                 ev.preventDefault();
+                // document.querySelector('.form-modal').reset();
             }
            
         });

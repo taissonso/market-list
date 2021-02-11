@@ -152,7 +152,10 @@ main form :focus {
   align-items: center;
   justify-content: flex-start;
   box-shadow: 5px 0px 10px #0f0f0f8a, -5px 0px 10px #0f0f0f8a, 0px 5px 10px #0f0f0f8a, -5px 5px 10px #0f0f0f8a, 5px 5px 10px #0f0f0f8a;
-  font-size: 18px;
+  font-family: "Gotham";
+  font-weight: lighter;
+  letter-spacing: 2px;
+  font-size: 14px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   padding-bottom: 5vh;
@@ -180,7 +183,7 @@ main form :focus {
   width: 15%;
 }
 .product-add tbody tr, .product-deleted tbody tr {
-  height: 25px;
+  height: 35px;
   border-top: none;
 }
 .product-add tbody td:first-child, .product-deleted tbody td:first-child {
@@ -197,11 +200,13 @@ main form :focus {
 .product-add thead {
   background-color: #4D321A;
   color: #ffffff;
+  text-transform: uppercase;
 }
 .product-add tbody td {
   border: 1px solid black;
   text-align: center;
   background-color: #faccb1;
+  text-transform: capitalize;
 }
 .product-add tbody input {
   all: unset;
@@ -211,7 +216,7 @@ main form :focus {
   display: inline-block;
 }
 .product-add tbody input:hover {
-  background-color: #22cc1c;
+  background-color: red;
 }
 
 #lista-vazia {
@@ -265,47 +270,22 @@ main form :focus {
 .product-deleted tbody input:checked {
   background-color: red;
 }
+.product-deleted tbody input:hover {
+  background-color: green;
+}
 
 .btn-editar {
-  font-family: "Gotham";
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #ffffff;
-  letter-spacing: 1px;
-  width: 90%;
-  height: 18px;
-  border-radius: 20px;
-  background-color: #008a00;
+  cursor: pointer;
 }
 .btn-editar:hover {
-  background-color: #ffe600;
-  color: #000000;
-  border: 2px solid #7a7a7a;
-}
-.btn-editar:focus {
-  outline: 0px auto -webkit-focus-ring-color;
-  outline-offset: 0px;
+  background-image: url("/img/editar-hover.png");
 }
 
 .btn-deletar {
-  font-family: "Gotham";
-  text-transform: uppercase;
-  font-size: 12px;
-  color: #ffffff;
-  letter-spacing: 1px;
-  width: 90%;
-  height: 18px;
-  border-radius: 20px;
-  background-color: #ff0000;
+  cursor: pointer;
 }
 .btn-deletar:hover {
-  background-color: #ff0000;
-  color: #000000;
-  border: 2px solid #7a7a7a;
-}
-.btn-deletar:focus {
-  outline: 0px auto -webkit-focus-ring-color;
-  outline-offset: 0px;
+  background-image: url("/img/lixeira-hover.png");
 }
 
 #abrirModal {
@@ -378,6 +358,9 @@ main form :focus {
   background-color: #faccb1;
   border-radius: 20px;
 }
+.tela-inteira #form-modal fieldset {
+  border: none;
+}
 .tela-inteira #form-modal form {
   display: flex;
   flex-direction: column;
@@ -432,57 +415,36 @@ main form :focus {
   align-items: center;
   justify-content: space-around;
 }
-.tela-inteira #form-modal .btns-modal button {
-  font-family: "Gotham";
-  text-transform: uppercase;
-  height: 25px;
-  width: 100px;
-  border: none;
-  border-radius: 20px;
-}
-.tela-inteira #form-modal fieldset {
+.tela-inteira #form-modal .btns-modal #btn-salvar, .tela-inteira #form-modal .btns-modal #btn-deletar, .tela-inteira #form-modal .btns-modal #btn-cancelar {
+  cursor: pointer;
+  height: 32px;
+  width: 32px;
+  background-color: transparent;
   border: none;
 }
-.tela-inteira #form-modal #btn-salvar {
-  background-color: #0d70f1;
-  box-shadow: 0 4px 0 #422626;
-  color: #ffffff;
-}
-.tela-inteira #form-modal #btn-salvar:hover {
-  background-color: #0d70f1;
-  color: #ffffff;
-  box-shadow: 0 4px 0 #7cb5ff;
-  color: #000000;
-}
-.tela-inteira #form-modal #btn-deletar {
-  background-color: #ff0808;
-  box-shadow: 0 4px 0 #422626;
-  color: #ffffff;
-}
-.tela-inteira #form-modal #btn-deletar:hover {
-  background-color: #ff0808;
-  color: #000000;
-  box-shadow: 0 5px 0 #ff6464;
-}
-.tela-inteira #form-modal #btn-cancelar {
-  background-color: #fffb00;
-  box-shadow: 0 4px 0 #422626;
-  color: #000000;
-}
-.tela-inteira #form-modal #btn-cancelar:hover {
-  background-color: #ff8800;
-  color: #ffffff;
-  box-shadow: 0 4px 0 #ffb374;
-  color: #ffffff;
-}
-.tela-inteira #form-modal #btn-salvar:active, .tela-inteira #form-modal #btn-deletar:active, .tela-inteira #form-modal #btn-cancelar:active {
-  position: relative;
-  top: 2px;
-  box-shadow: none;
-}
-.tela-inteira #form-modal :focus {
+.tela-inteira #form-modal .btns-modal #btn-salvar:focus, .tela-inteira #form-modal .btns-modal #btn-deletar:focus, .tela-inteira #form-modal .btns-modal #btn-cancelar:focus {
   outline: 0px auto -webkit-focus-ring-color;
   outline-offset: 0px;
+}
+.tela-inteira #form-modal .btns-modal #btn-salvar {
+  background-image: url("/img/save.png");
+}
+.tela-inteira #form-modal .btns-modal #btn-salvar:hover {
+  background-image: url("/img/save-hover.png");
+  z-index: 1000;
+}
+.tela-inteira #form-modal .btns-modal #btn-deletar {
+  background-image: url("/img/lixeira-32.png");
+}
+.tela-inteira #form-modal .btns-modal #btn-deletar:hover {
+  background-image: url("/img/lixeira-32-hover.png");
+}
+.tela-inteira #form-modal .btns-modal #btn-cancelar {
+  background-image: url("/img/cancelar.png");
+}
+.tela-inteira #form-modal .btns-modal #btn-cancelar:hover {
+  background-image: url("/img/cancelar-hover.png");
+  z-index: 1000;
 }
 
 /*# sourceMappingURL=style.css.map */

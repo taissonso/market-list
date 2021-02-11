@@ -12,33 +12,43 @@ function adicionarNaTabela(lista, item) {
     let celula;
     let botao;
     let label;
+    let imagem;
+
     celula = criarElemento('td');
-    integrarElemento(celula, criarCheckbox(item, 'check-'+item.id));
+    integrarElemento(celula, criarCheckbox(item, 'check-' + item.id));
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
     label = criarElemento('label');
-    label.setAttribute("for",  "check-" + item.id)
+    label.setAttribute("for", "check-" + item.id)
     label.innerHTML = item.produto;
     integrarElemento(celula, label);
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
-    if(item.quantidade.trim() == ''){
+    if (item.quantidade.trim() == '') {
         celula.innerHTML = '-';
-    }else {
+    } else {
         celula.innerHTML = item.quantidade;
     }
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
-    botao = criarBotao('edit-'+item.id, 'editar');
-    integrarElemento(celula, botao);
+    botao = criarBotao('edit-' + item.id, 'editar');
+    imagem = criarElemento('img')
+    imagem.src = "../img/editar.png";
+    imagem.id = 'edit-' + item.id;
+    imagem.className = 'btn-editar';
+    integrarElemento(celula, imagem);
     integrarElemento(linha, celula);
 
     celula = criarElemento('td');
-    botao = criarBotao('delet-'+item.id, 'deletar');
-    integrarElemento(celula, botao);
+    // botao = criarBotao('delet-'+item.id, 'deletar');
+    imagem = criarElemento('img')
+    imagem.src = "../img/lixeira.png";
+    imagem.id = 'delet-' + item.id;
+    imagem.className = 'btn-deletar';
+    integrarElemento(celula, imagem);
     integrarElemento(linha, celula);
 
     integrarElemento(corpoTabela, linha);
@@ -56,7 +66,7 @@ function criarCheckbox(item, id) {
     let checkbox = criarElemento('input');
     checkbox.type = 'checkbox';
     checkbox.id = id;
-    
+
     if (item.check == true) {
         checkbox.checked = true;
     } else {
@@ -65,7 +75,7 @@ function criarCheckbox(item, id) {
     return checkbox;
 }
 
-function criarBotao(id, nome){
+function criarBotao(id, nome) {
     let botao = criarElemento('button');
     botao.id = id;
     botao.className = 'btn-' + nome;
