@@ -1,10 +1,10 @@
 # market-list
     Se trata de uma lista de compras para supermercado/feira. A medida que se insere os itens, os
-    mesmos serão mostrados em uma tabela, com a descrição e quantidade inseridos, juntos com dois botões
-    para editar e deletar o mesmo. No primeiro campo da tabela de cada item terá um checkbox para 
-    marcar item quando concluído. Quando concluídos, os itens irão para o final da tabela. Os itens podem
-    ser devolvidos para a lista original ao selecionar seu checkbox. Então o item é devolvido para sua
-    posição original.    
+    mesmos serão mostrados em uma tabela, com a descrição e quantidade inseridos, juntos com dois
+     botões para editar e deletar o mesmo. No primeiro campo da tabela de cada item terá um checkbox 
+     para marcar item quando concluído. Quando concluídos, os itens irão para o final da tabela. 
+     Os itens podem ser devolvidos para a lista original ao selecionar seu checkbox. Então o item é 
+     devolvido para sua posição original.    
 
     -- A lista de compras será salva no localStorage, ao carregar a página verifica se já existe 
     uma lista no localStorage. 

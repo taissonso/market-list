@@ -14,17 +14,16 @@
   src: url("../../fonts/cinematografica/Cinematografica-Extrabold-trial.ttf");
 }
 body {
-  height: 100vh;
   background-image: url("/img/fundo-03.jpg");
+  overflow-x: hidden;
 }
 
 header {
   height: 28vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
-  margin-left: 25%;
 }
 header h1 {
   font-family: "Cinematografica";
@@ -34,21 +33,17 @@ header h1 {
   text-shadow: -2px 2px #0d70f1;
   letter-spacing: 4px;
 }
-header #carrinho {
-  position: relative;
-}
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 72vh;
   padding-bottom: 5vh;
 }
 main form {
   background-color: #FACCB1;
   height: 20vh;
-  width: 50vw;
+  width: 60vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,7 +140,7 @@ main form :focus {
 
 .list {
   background-color: #8a5f39;
-  width: 50vw;
+  width: 60vw;
   min-height: 40vh;
   display: flex;
   flex-direction: column;
@@ -159,38 +154,6 @@ main form :focus {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   padding-bottom: 5vh;
-}
-
-.product-add thead th, .product-deleted thead th {
-  border: 1px solid black;
-  height: 40px;
-}
-.product-add thead th:first-child, .product-deleted thead th:first-child {
-  border-left: none;
-  width: 5%;
-}
-.product-add thead th:nth-child(2), .product-deleted thead th:nth-child(2) {
-  width: 40%;
-}
-.product-add thead th:nth-child(3), .product-deleted thead th:nth-child(3) {
-  width: 25%;
-}
-.product-add thead th:nth-child(4), .product-deleted thead th:nth-child(4) {
-  width: 15%;
-}
-.product-add thead th:last-child, .product-deleted thead th:last-child {
-  border-right: none;
-  width: 15%;
-}
-.product-add tbody tr, .product-deleted tbody tr {
-  height: 35px;
-  border-top: none;
-}
-.product-add tbody td:first-child, .product-deleted tbody td:first-child {
-  border-left: none;
-}
-.product-add tbody td:last-child, .product-deleted tbody td:last-child {
-  border-right: none;
 }
 
 .product-add {
@@ -218,6 +181,56 @@ main form :focus {
 .product-add tbody input:hover {
   background-color: red;
 }
+.product-add thead th {
+  border: 1px solid black;
+  height: 40px;
+}
+.product-add thead th:first-child {
+  border-left: none;
+  width: 6vw;
+}
+.product-add thead th:nth-child(2) {
+  width: 15vw;
+}
+.product-add thead th:nth-child(3) {
+  width: 15vw;
+}
+.product-add thead th:nth-child(4) {
+  width: 12vw;
+}
+.product-add thead th:last-child {
+  border-right: none;
+  width: 12vw;
+}
+.product-add tbody tr {
+  height: 35px;
+  border-top: none;
+}
+.product-add tbody td:first-child {
+  border-left: none;
+}
+.product-add tbody td:last-child {
+  border-right: none;
+}
+
+.product-add tbody td:first-child {
+  width: 6vw;
+}
+.product-add tbody td:nth-child(2) {
+  max-width: 15vw;
+  word-wrap: break-word;
+}
+.product-add tbody td:nth-child(3) {
+  max-width: 15vw;
+  word-wrap: break-word;
+}
+.product-add tbody td:nth-child(4) {
+  max-width: 12vw;
+}
+.product-add tbody td:last-child {
+  max-width: 12vw;
+  border-right: none;
+}
 
 #lista-vazia {
   font-family: "Cinematografica";
@@ -233,8 +246,13 @@ main form :focus {
 }
 
 .product-deleted {
+  width: 60vh;
+  border-collapse: collapse;
   width: 100%;
   border-collapse: collapse;
+}
+.product-deleted thead {
+  display: none;
 }
 .product-deleted tbody tr:first-child {
   border-top: 4px solid black;
@@ -243,20 +261,28 @@ main form :focus {
   border: 1px solid black;
   text-align: center;
   background-color: #C95614;
+  text-transform: capitalize;
+}
+.product-deleted tbody td:first-child {
+  width: 6vw;
 }
 .product-deleted tbody td:nth-child(2) {
-  width: 40%;
+  min-width: 15vw;
+  max-width: 15vw;
   text-decoration: line-through red 2px;
+  word-wrap: break-word;
 }
 .product-deleted tbody td:nth-child(3) {
-  width: 25%;
+  min-width: 15vw;
+  max-width: 15vw;
   text-decoration: line-through red 2px;
+  word-wrap: break-word;
 }
 .product-deleted tbody td:nth-child(4) {
-  width: 15%;
+  width: 12vw;
 }
 .product-deleted tbody td:last-child {
-  width: 15%;
+  width: 12vw;
   border-right: none;
 }
 .product-deleted tbody input {
@@ -445,6 +471,110 @@ main form :focus {
 .tela-inteira #form-modal .btns-modal #btn-cancelar:hover {
   background-image: url("/img/cancelar-hover.png");
   z-index: 1000;
+}
+.tela-inteira #btn-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  header {
+    height: 15vh;
+  }
+  header h1 {
+    font-size: 72px;
+  }
+
+  /*Definindo largura de todos os itens que tem 100% de largura*/
+  .form-principal {
+    width: 100vw;
+    height: 30vh;
+  }
+  .form-principal .entradas {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-principal .botoes button {
+    width: 120px;
+  }
+
+  main {
+    max-width: 100vw;
+  }
+
+  #lista-vazia {
+    font-size: 38px;
+  }
+
+  .list {
+    width: 100vw;
+  }
+  .list .product-add thead th:first-child {
+    border-left: none;
+    width: 10vw;
+  }
+  .list .product-add thead th:nth-child(2) {
+    width: 30vw;
+  }
+  .list .product-add thead th:nth-child(3) {
+    width: 30vw;
+  }
+  .list .product-add thead th:nth-child(4) {
+    width: 15vw;
+  }
+  .list .product-add thead th:last-child {
+    border-right: none;
+    width: 15vw;
+  }
+  .list .product-add tbody td:first-child, .list .product-deleted tbody td:first-child {
+    width: 10vw;
+  }
+  .list .product-add tbody td:nth-child(2), .list .product-deleted tbody td:nth-child(2) {
+    width: 30vw;
+    word-wrap: break-word;
+  }
+  .list .product-add tbody td:nth-child(3), .list .product-deleted tbody td:nth-child(3) {
+    width: 30vw;
+    word-wrap: break-word;
+  }
+  .list .product-add tbody td:nth-child(4), .list .product-deleted tbody td:nth-child(4) {
+    width: 15vw;
+  }
+  .list .product-add tbody td:last-child, .list .product-deleted tbody td:last-child {
+    width: 15vw;
+    border-right: none;
+    background-color: red;
+  }
+
+  .tela-inteira .caixa-modal {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    border-radius: 0;
+  }
+  .tela-inteira .caixa-modal .fechar {
+    position: relative;
+    top: 5vh;
+    right: 10vw;
+  }
+  .tela-inteira .caixa-modal .titulo-modal {
+    font-size: 38px;
+    position: relative;
+    top: 5vh;
+  }
+  .tela-inteira .caixa-modal #form-modal {
+    position: relative;
+    top: 10vh;
+    width: 90%;
+    height: 40vh;
+  }
+  .tela-inteira .caixa-modal #btn-mobile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-color: red;
+    position: relative;
+    top: 20vh;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
