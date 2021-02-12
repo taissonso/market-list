@@ -2,7 +2,7 @@ import {
     adicionarNaTabela
 } from './elementos.js';
 
-window.addEventListener("load", () => {
+window.addEventListener("load", (ev) => {
 
     if (localStorage.hasOwnProperty('listaProdutos')) {
         carregarLista();
@@ -228,71 +228,72 @@ window.addEventListener("load", () => {
 
     /** Saber qual das tabelas foi clicadas e passar o nome da lista e o botão para a função */
     $('.product-add').on("click", ".btn-editar", (botao) => {
-        editarItem(botao, 'listaProdutos');
+        editarItem(botao);
     });
 
     $('.product-deleted').on("click", ".btn-editar", (botao) => {
-        editarItem(botao, 'listaRemovidos');
+        editarItem(botao);
     });
     /**
-     * Ao chamar a função abre o modal, pega a lista passada para buscar o elemento,
-     * tranforma o id para o padrão de busca usando regex, localiza o mesmo usando o 
-     * metodo find, adiciona os valores do objeto nos input's do modal, fica escutando
-     * o click no botão de Salvar. Caso positivo altera o objeto, atualiza o localStorage,
-     * oculta o modal, reseta o form do modal, para não ficar com o último elemento editado
-     * salvo no cache e por fim atualiza a tabela. 
-     * Botão deletar, foi colocado caso se queira deletar o produto da lista. 
-     * 
+     * Ao chamar a função abre o modal,  pega o valor de qual tabela foi clicada e atribui o nome dependendo 
+     * da resposta do if ternario. Transforma o id do botão no id correto do objeto usando metodo replace.
+     * Busca o objeto na lista e o atribui nos inputs do modal. Fica escutando o evento com metodo one dos
+     * botoes de salvar e deletar.  
+     * Em caso de salvar faz a busca do elemento com o metodo map e o atualiza caso positivo. E com o resultado
+     * atualiza o localStorage. Se deletar, faz a busca do elemento com o metodo indexOf e se encontrado na lista, 
+     * deleta o mesmo usando o metodo splice e depois atualiza o localStorage.
      * @param {Botão que foi clicado na tabela} botao 
      * @param {Saber qual lista do localStorage usar} lista 
      * 
      */
-    function editarItem(botao, lista) {
+    function editarItem(botao) {
         $('#abrirModal').show(600);
         $('#abrirModal').css({display:"flex"});
-        
+          
+        let lista = (botao.delegateTarget.classList.value == "product-add") ? "listaProdutos" : "listaRemovidos";
         let listaObjetos = JSON.parse(localStorage.getItem(lista));
-        let id = botao.currentTarget.id;
-        console.log(id)
-        console.log(lista)
-        id = id.replace(/([^\d])+/gim, '');
+        let idBotao = botao.currentTarget.id;
+        idBotao = idBotao.replace(/([^\d])+/gim, '');
+        let objeto = listaObjetos.find((chave) => chave.id == idBotao);
 
-        let objeto = listaObjetos.find((chave) => chave.id == id);
-        console.log(objeto)
         document.getElementById('productLabel').value = objeto.produto;
         document.getElementById('quantityLabel').value = objeto.quantidade;
-        
-        $('#btn-salvar').click((ev) => {
-            // console.log(lista)
+
+        $('#btn-salvar').one('click', function(ev) {
             let produto = document.getElementById('productLabel').value;
+            let quantidade = document.getElementById('quantityLabel').value;
             let span = document.getElementById('errorModal');
+           
             if (produto.trim() == '') {
                 span.style.visibility = 'visible';
                 ev.preventDefault();
             } else {
-                //provavel erro esteja aqui
                 objeto.produto = produto;
-                objeto.quantidade = document.getElementById('quantityLabel').value;
-                localStorage.setItem(lista, JSON.stringify(listaObjetos));
-                carregarLista();
-                // document.querySelector('.form-modal').reset();
+                objeto.quantidade = quantidade;
+
+                let resultado = listaObjetos.map( (chave)=>{
+                    if (chave.id == objeto.id){
+                        chave = objeto;
+                    }
+                    return chave
+                })
+
+                localStorage.setItem(lista, JSON.stringify(resultado));
                 $('#abrirModal').hide(600);
                 ev.preventDefault();
-                // document.querySelector('.form-modal').reset();
             }
-           
-        });
+            carregarLista();
+        })
 
-        $('#btn-deletar').click((ev) => {
+        $('#btn-deletar').one("click", (ev) => {
             let index = listaObjetos.indexOf(objeto);
             if (index > -1) {
                 listaObjetos.splice(index, 1);
                 localStorage.setItem(lista, JSON.stringify(listaObjetos));
                 carregarLista();
                 $('#abrirModal').hide(900);
-                ev.preventDefault();
             }
-            
+            ev.preventDefault();
         })
     }
 
