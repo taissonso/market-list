@@ -7,11 +7,11 @@
 
 @font-face {
   font-family: "Gotham";
-  src: url("../fonts/Gotham/GothamPro-Medium.ttf");
+  src: url("../../fonts/Gotham/GothamPro-Medium.ttf");
 }
 @font-face {
   font-family: "Cinematografica";
-  src: url("../fonts/cinematografica/Cinematografica-Extrabold-trial.ttf");
+  src: url("../../fonts/cinematografica/Cinematografica-Extrabold-trial.ttf");
 }
 body {
   background-image: url("../image/fundo.jpg");
@@ -476,7 +476,7 @@ main form :focus {
   display: none;
 }
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 1024px) {
   header {
     height: 15vh;
   }
