@@ -542,7 +542,6 @@ main form :focus {
   .list .product-add tbody td:last-child, .list .product-deleted tbody td:last-child {
     width: 15vw;
     border-right: none;
-    background-color: red;
   }
 
   .tela-inteira .caixa-modal {
