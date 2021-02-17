@@ -14,7 +14,7 @@
   src: url("../../fonts/cinematografica/Cinematografica-Extrabold-trial.ttf");
 }
 body {
-  background-image: url("/img/fundo.jpg");
+  background-image: url("../img/fundo.jpg");
   overflow-x: hidden;
 }
 
