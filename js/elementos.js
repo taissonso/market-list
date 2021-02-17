@@ -36,7 +36,7 @@ function adicionarNaTabela(lista, item) {
     celula = criarElemento('td');
     botao = criarBotao('edit-' + item.id, 'editar');
     imagem = criarElemento('img')
-    imagem.src = "../img/editar.png";
+    imagem.src = "img/editar.png";
     imagem.id = 'edit-' + item.id;
     imagem.className = 'btn-editar';
     integrarElemento(celula, imagem);
@@ -45,7 +45,7 @@ function adicionarNaTabela(lista, item) {
     celula = criarElemento('td');
     // botao = criarBotao('delet-'+item.id, 'deletar');
     imagem = criarElemento('img')
-    imagem.src = "../img/lixeira.png";
+    imagem.src = "img/lixeira.png";
     imagem.id = 'delet-' + item.id;
     imagem.className = 'btn-deletar';
     integrarElemento(celula, imagem);
