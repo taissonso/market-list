@@ -14,7 +14,7 @@
   src: url("../../fonts/cinematografica/Cinematografica-Extrabold-trial.ttf");
 }
 body {
-  background-image: url("/img/fundo-03.jpg");
+  background-image: url("/img/fundo.jpg");
   overflow-x: hidden;
 }
 
@@ -304,7 +304,7 @@ main form :focus {
   cursor: pointer;
 }
 .btn-editar:hover {
-  background-image: url("/img/editar-hover.png");
+  background-image: url("/img/editarhover.png");
 }
 
 .btn-deletar {
