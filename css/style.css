@@ -311,7 +311,7 @@ main form :focus {
   cursor: pointer;
 }
 .btn-deletar:hover {
-  background-image: url("/image/lixeira-hover.png");
+  background-image: url("../image/lixeira-hover.png");
 }
 
 #abrirModal {
@@ -453,23 +453,23 @@ main form :focus {
   outline-offset: 0px;
 }
 .tela-inteira #form-modal .btns-modal #btn-salvar {
-  background-image: url("/image/save.png");
+  background-image: url("../image/save.png");
 }
 .tela-inteira #form-modal .btns-modal #btn-salvar:hover {
-  background-image: url("/image/save-hover.png");
+  background-image: url("../image/save-hover.png");
   z-index: 1000;
 }
 .tela-inteira #form-modal .btns-modal #btn-deletar {
-  background-image: url("/image/lixeira-32.png");
+  background-image: url("../image/lixeira-32.png");
 }
 .tela-inteira #form-modal .btns-modal #btn-deletar:hover {
-  background-image: url("/image/lixeira-32-hover.png");
+  background-image: url("../image/lixeira-32-hover.png");
 }
 .tela-inteira #form-modal .btns-modal #btn-cancelar {
-  background-image: url("/image/cancelar.png");
+  background-image: url("../image/cancelar.png");
 }
 .tela-inteira #form-modal .btns-modal #btn-cancelar:hover {
-  background-image: url("/image/cancelar-hover.png");
+  background-image: url("../image/cancelar-hover.png");
   z-index: 1000;
 }
 .tela-inteira #btn-mobile {
