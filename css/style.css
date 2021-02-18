@@ -478,7 +478,7 @@ main form :focus {
 
 @media (max-width: 1024px) {
   header {
-    height: 20vh;
+    height: 15vh;
   }
   header h1 {
     font-size: 72px;
