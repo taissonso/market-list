@@ -478,7 +478,7 @@ main form :focus {
 
 @media (max-width: 1024px) {
   header {
-    height: 15vh;
+    height: 20vh;
   }
   header h1 {
     font-size: 72px;
@@ -488,9 +488,8 @@ main form :focus {
   .form-principal {
     width: 100vw;
     min-height: 200px;
-    /* padding-top: 5vh;
-    padding-bottom: 5vh; */
-    position: fixed;
+    position: relative;
+    top: 5vh
   }
   .form-principal .entradas {
     display: flex;
@@ -511,10 +510,8 @@ main form :focus {
 
   .list {
     width: 100vw;
-    height: 200px;
     position: relative;
-    top: 30vh;
-    flex-grow: 1;
+    top: 5vh;
   }
   .list .product-add thead th:first-child {
     border-left: none;
