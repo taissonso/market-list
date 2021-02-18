@@ -1,45 +1,46 @@
+# :clipboard: market-list :clipboard: 
 # https://taissonso.github.io/market-list/
-# market-list
 
-    Se trata de uma lista de compras para supermercado/feira. A medida que se insere os itens, os
-    mesmos serão mostrados em uma tabela, com a descrição e quantidade inseridos, juntos com dois
-    botões para editar e deletar o mesmo. No primeiro campo da tabela de cada item terá um checkbox 
-    para marcar item quando concluído. Quando concluídos, os itens irão para o final da tabela. 
-    Os itens podem ser devolvidos para a lista original ao selecionar seu checkbox. Então o item é 
-    devolvido para sua posição original.    
+Se trata de uma lista de compras para supermercado/feira. A medida que se insere os itens, os mesmos serão mostrados em uma tabela, com a descrição e quantidade inseridos, juntos com dois botões para editar e deletar o mesmo. No primeiro campo da tabela de cada item terá um checkbox para marcar item quando concluído. Quando concluídos, os itens irão para o final da tabela. Os itens podem ser devolvidos para a lista original ao selecionar seu checkbox. Então o item é devolvido para sua posição original.    
 
-    -- A lista de compras será salva no localStorage, ao carregar a página verifica se já existe 
-    uma lista no localStorage. 
-        - Se positivo, carrega a lista e mostra os itens na tabela. 
-        - Se negativo, cria o vetor no localStorage e mostra a mensagem de lista vazia na tabela.
+* Na lista de compras será salva no localStorage, ao carregar a página verifica se já existe 
+uma lista no localStorage. 
+  - Se positivo, carrega a lista e mostra os itens na tabela. 
+  - Se negativo, cria o vetor no localStorage e mostra a mensagem de lista vazia na tabela.
 
-    -- Campos de entrada: os input's 'Produto' e 'Quantidade' podem enviar produtos repetidos, 
-    a única restrição será o envio de itens vazios no campo 'Produto'.
-        - Caso positivo para itens vazios irá mostrar uma mensagem alertando o eventual erro.
-        - Caso de envio com sucesso, irá limpar os input's e adicionara o item há tabela. 
+* Campos de entrada: os input's 'Produto' e 'Quantidade' podem enviar produtos repetidos, a única 
+restrição será o envio de itens vazios no campo 'Produto'.
+  - Caso positivo para itens vazios irá mostrar uma mensagem alertando o eventual erro.
+  - Caso de envio com sucesso, irá limpar os input's e adicionara o item há tabela. 
 
-    -- Tabela: lista todos os produtos adicionados, cria o checkbox no primeiro
-    campo, para ser marcado quando o item for concluído/comprado. 
-        - No campo quantidade, quando não for adicionado uma quantidade, será inserido um sinal de
-        menos (-).
-        - Checkbox:   
-            - Se for clicado, manda para o fim da tabela e deixa o checked com true.
-            - Quando estiver ativado (true) e for clicado retorna o item para a sua posição
-            original com o checkbox em 'false' (desmarcado).
-            - O checkbox também pode ser marcado ao se clicar em cima do nome do item. 
+* Tabela: lista todos os produtos adicionados, cria o checkbox no primeiro campo, para ser marcado 
+quando o item for concluído/comprado. 
+  - No campo quantidade, quando não for adicionado uma quantidade, será inserido um sinal de menos (-).
+  - Checkbox:   
+    - Se for clicado, manda para o fim da tabela e deixa o checked com true.
+    - Quando estiver ativado (true) e for clicado retorna o item para a sua posição original com o 
+    checkbox em 'false' (desmarcado).
+    - O checkbox também pode ser marcado ao se clicar em cima do nome do item. 
+  
+* Botão 'Editar': irá abrir um modal para a editar o item/produto selecionado.
 
-    -- Botão 'Editar': irá abrir um modal para a editar o item/produto selecionado.
+* Botão 'Deletar': deleta o item/produto da tabela.
 
-    -- Botão 'Deletar': deleta o item/produto da tabela.
-
-    -- Botão 'Limpar Lista': caso queira deletar toda a tabela.
+* Botão 'Limpar Lista': caso queira deletar toda a tabela.
     
-    -- Modal: quando aberto o mesmo irá carregar o item selecionado nos inputs de "Produto" e "Quantidade".
-    No modal existem 3 opções:
-        -- Salvar: quando feito as alterações atualiza o item modificado no localStorage. 
+* Modal: quando aberto o mesmo irá carregar o item selecionado nos inputs de "Produto" e "Quantidade".
+No modal existem 3 opções:
+  - Salvar: quando feito as alterações atualiza o item modificado no localStorage. 
         
-        -- Deleta: deleta o item da tabela e do localstorage.
+  - Deleta: deleta o item da tabela e do localstorage.
         
-        -- Cancelar: fecha o modal. 
+  - Cancelar: fecha o modal. 
         
-        -- X: outra opção de fechar/cancelar o modal. 
+  - X: outra opção de fechar/cancelar o modal.
+
+:red_circle:**OBSERVAÇÃO**:red_circle: quando criado o formulário, foi usado a tag \<fieldset> para um melhor controle dos botões, input's e label's. Porém ao verificar no site [Can I Use](https://caniuse.com/?search=fieldset) a tag não tem suporte há flexbox e grid, resultando em um alinhamento errado em navegadores padrões de dispositivos mobiles.
+
+
+**Agradecimento:** Se você leu até aqui, eu só tenho a agradecer pelo seu tempo em ver esse projeto, que me ajudou muito nos meus estudos e aprendizado. Se tiver alguma dúvida, sugestão ou critíca construtiva, por favor entre em contado, é sempre bom trocar idéias e conhecimento com o próximo. Obrigado!
+
+:coffee: :floppy_disk: :computer: :tada: :video_game: 
