@@ -487,7 +487,9 @@ main form :focus {
   /*Definindo largura de todos os itens que tem 100% de largura*/
   .form-principal {
     width: 100vw;
-    min-height: 30vh;
+    height: auto;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
   }
   .form-principal .entradas {
     display: flex;
