@@ -487,7 +487,7 @@ main form :focus {
   /*Definindo largura de todos os itens que tem 100% de largura*/
   .form-principal {
     width: 100vw;
-    height: 30vh;
+    min-height: 30vh;
   }
   .form-principal .entradas {
     display: flex;
@@ -509,7 +509,6 @@ main form :focus {
     width: 100vw;
     position: absolute;
     top: 45vh;
-    min-height: auto;
     flex-grow: 1;
   }
   .list .product-add thead th:first-child {
