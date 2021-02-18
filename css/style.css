@@ -509,6 +509,8 @@ main form :focus {
     width: 100vw;
     position: absolute;
     top: 45vh;
+    min-height: auto;
+    flex-grow: 1;
   }
   .list .product-add thead th:first-child {
     border-left: none;
