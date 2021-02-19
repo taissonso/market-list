@@ -505,7 +505,7 @@ main form :focus {
 
   #lista-vazia {
     font-size: 38px;
-    height: 20px;
+    height: 100px;
   }
 
   .list {
@@ -569,7 +569,7 @@ main form :focus {
     position: relative;
     top: 10vh;
     width: 90%;
-    height: 40vh;
+    height: 200px;
   }
   .tela-inteira .caixa-modal #btn-mobile {
     display: flex;
